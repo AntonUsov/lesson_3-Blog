@@ -1,0 +1,17 @@
+{% extends 'blogs/wrapper.html' %}
+
+{% block head %}
+	{% block title %}
+    <title>{{ post.title }}</title>
+{% endblock %}
+{% endblock %}
+
+{% block content %}
+<article class="uk-article">
+    <h1 class="uk-article-title"><a class="uk-link-reset" href="">{{ post.title }}</a></h1>
+    <p class="uk-article-meta">Автор <a href="#">{{ post.user  }}</a>. Дата публикации: {{ post.pub_date  }}</p>
+     <hr>
+    <p class="uk-text-lead">{{ post.text }}</p>
+</article>
+<a class="uk-margin-top uk-button uk-button-text" href="/">Вернуться назад</a>
+{% endblock %}

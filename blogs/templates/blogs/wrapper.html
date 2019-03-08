@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'uikit-3.0.3/css/uikit.min.css' %}" />
+    <!-- UIkit JS -->
+    <script src="{% static 'uikit-3.0.3/js/uikit.min.js'%}"></script>
+    <script src="{% static 'uikit-3.0.3/js/uikit-icons.min.js'%}"></script>
+    {% block head %}
+	{% block title %}
+    {% endblock %}
+{% endblock %}
+</head>
+<body>
+
+<nav class="uk-navbar-container" uk-navbar>
+    <div class="uk-navbar-left uk-margin-left">
+
+        <ul class="uk-navbar-nav">
+            <li class="uk-active"><a href="/">Главная</a></li>
+            <!--<li>-->
+                <!--<a href="#">Родитель</a>-->
+                <!--<div class="uk-navbar-dropdown">-->
+                    <!--<ul class="uk-nav uk-navbar-dropdown-nav">-->
+                        <!--<li class="uk-active"><a href="#">Активный</a></li>-->
+                        <!--<li><a href="#">Ссылка</a></li>-->
+                        <!--<li><a href="#">Ссылка</a></li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li><a href="#">Ссылка</a></li>-->
+        </ul>
+
+    </div>
+</nav>
+<section class="uk-section uk-section-default" uk-height-viewport="expand:true">
+<div class="uk-container uk-container-large uk-margin">
+{% block content %}
+
+{% endblock %}
+</div>
+</section>
+
+
+<footer>
+<div class="uk-section uk-section-muted uk-section-xsmall">
+<div class="uk-container">
+<div class="uk-grid-match uk-child-width-1-1@m uk-grid uk-grid-stack" uk-grid="">
+<div class="uk-text-center uk-text-small uk-first-column">
+<p>
+© <a class="uk-link-text" href="https://github.com/AntonUsov">AntonUsov</a> | <a class="uk-link-text" href="https://github.com/AntonUsov/Task_manager">lesson 3 - Blog</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+</footer>
+
+
+</body>
+</html>

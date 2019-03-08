@@ -1,0 +1,57 @@
+{% extends 'blogs/wrapper.html' %}
+
+{% block head %}
+{% block title %}
+<title>Главная</title>
+{% endblock %}
+{% endblock %}
+
+{% block content %}
+
+<div class="uk-margin-remove-top" uk-filter="target: .js-filter">
+
+    <ul class="uk-subnav uk-subnav-pill">
+        <li class="" uk-filter-control><a href="#">Все</a></li>
+        {% if user_list %}
+        {% for user in user_list %}
+        <li uk-filter-control="[data-user-name='{{ user.name }}']"><a href="#">{{ user.name }}</a></li>
+        {% endfor %}
+        {% endif %}
+    </ul>
+    <ul class="js-filter uk-child-width-1-3@m" uk-grid>
+        {% if news_list_param %}
+        {% for news in news_list_param %}
+        <li data-user-name="{{ news.user }}">
+            <div>
+                <div class="uk-card uk-card-default">
+                    <div class="uk-card-header">
+                        <div class="uk-grid-small uk-flex-middle" uk-grid>
+                            <div class="uk-width-auto">
+                                <!--<img class="uk-border-circle" width="40" height="40" src="images/avatar.jpg">-->
+                            </div>
+                            <div class="uk-width-expand">
+                                <h3 class="uk-card-title uk-margin-remove-bottom"><a href="/blog/{{ news.id }}/"
+                                                                                     class="uk-link-heading">
+                                    {{ news.title|truncatechars:40 }}
+                                </a>
+                                </h3>
+                                <p class="uk-text-meta uk-margin-remove-top">
+                                    <time datetime="">{{ news.user }}, {{ news.pub_date }}</time>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-card-body uk-text-justify ">
+                        <p>{{ news.text|truncatechars:120 }}</p>
+                    </div>
+                    <!--<div class="uk-card-footer">-->
+                    <!--<a href="/blog/{{ news.id }}/" class="uk-button uk-button-text">Ссылка</a>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </li>
+        {% endfor %}
+        {% endif %}
+    </ul>
+</div>
+{% endblock %}
