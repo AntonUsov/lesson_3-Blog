@@ -1,0 +1,28 @@
+{% extends 'blogs/wrapper.html' %}
+
+{% block head %}
+	{% block title %}
+    <title>{{ post.title }}</title>
+{% endblock %}
+{% endblock %}
+
+{% block content %}
+{% for post in object_list %}
+<article class="uk-article">
+    <h1 class="uk-article-title"><a class="uk-link-reset" href="/blog/{{ post.id }}/"">{{ post.title }}</a></h1>
+    <p class="uk-article-meta">Автор <a href="#">{{ post.user  }}</a></p>
+     <hr>
+    <p class="uk-text-lead">{{ post.text }}</p>
+    <p class="uk-article-meta">АДата публикации: {{ post.pub_date|date:"d.m.Y в H:i"   }}</p>
+    {% empty %}
+     <p>Статей не обнаружено :</p>
+</article>
+{% endfor %}
+
+<select id="input-limit" class="form-control">
+              <option value="4" selected="selected">4</option>
+              <option value="8">8</option>
+              <option value="25">25</option>
+            </select>
+
+{% endblock %}
