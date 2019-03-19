@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-{% for post in object_list %}
+{% for post in postlist.post %}
 <article class="uk-article">
     <h1 class="uk-article-title"><a class="uk-link-reset" href="/blog/{{ post.id }}/"">{{ post.title }}</a></h1>
     <p class="uk-article-meta">Автор <a href="#">{{ post.user  }}</a></p>

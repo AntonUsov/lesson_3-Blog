@@ -18,8 +18,30 @@
     <div class="uk-navbar-left uk-margin-left">
 
         <ul class="uk-navbar-nav">
-            <li class="uk-active"><a href="/">Главная</a></li>
-             <li class="uk-active"><a href="/about">О проекте</a></li>
+            <li class=""><a href="/">Главная</a></li>
+             <li class=""><a href="/about">О проекте</a></li>
+             <li class=""><a href="/post_list">Список статей</a></li>
+            <!--<li>-->
+                <!--<a href="#">Родитель</a>-->
+                <!--<div class="uk-navbar-dropdown">-->
+                    <!--<ul class="uk-nav uk-navbar-dropdown-nav">-->
+                        <!--<li class="uk-active"><a href="#">Активный</a></li>-->
+                        <!--<li><a href="#">Ссылка</a></li>-->
+                        <!--<li><a href="#">Ссылка</a></li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</li>-->
+            <!--<li><a href="#">Ссылка</a></li>-->
+        </ul>
+
+    </div>
+        <div class="uk-navbar-right uk-margin-right">
+        <ul class="uk-navbar-nav">
+            {% if username %}
+            <li class=""><a href="/auth/logout">Выход {{ username }} </a></li>
+            {% else %}
+             <li class=""><a href="/auth/login">Войти</a></li>
+            {% endif %}
             <!--<li>-->
                 <!--<a href="#">Родитель</a>-->
                 <!--<div class="uk-navbar-dropdown">-->
@@ -37,9 +59,9 @@
 </nav>
 <section class="uk-section uk-section-default" uk-height-viewport="expand:true">
 <div class="uk-container uk-container-large uk-margin">
-{% block content %}
+{% block content %}{% endblock %}
 
-{% endblock %}
+{% block login %}{% endblock %}
 </div>
 </section>
 

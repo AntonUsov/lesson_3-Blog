@@ -4,6 +4,8 @@ from django.template import loader, Context
 from models import Post, User
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView
+from django.core.context_processors import csrf
+from django.contrib import auth
 
 
 class AboutView(TemplateView):
@@ -25,7 +27,8 @@ class PostListView(ListView):
                           % {'class_name': self.__class__.__name__})
         context = self.get_context_data(object_list=self.object_list.filter())
         # context = self.object_list.filter( Post.user.name['User_A'] )
-        return self.render_to_response(context)
+        # username = auth.get_user(request).username
+        return self.render_to_response({ 'postlist': context, 'username': auth.get_user(request).username})
 
     def get_paginate_by(self, queryset):
         """
@@ -49,6 +52,7 @@ def index(request):
         'news_list_param': news_list,
         # 'text': text,
         'user_list': user_list,
+        'username': auth.get_user(request).username,
     })
     return HttpResponse(template.render(context))
 
