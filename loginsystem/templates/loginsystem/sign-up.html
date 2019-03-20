@@ -21,8 +21,11 @@
                         <div>
                             <div class="uk-card-body">
                                 <h3 class="uk-card-title uk-text-bold uk-text-uppercase uk-text-primary">Sign up</h3>
-                                <form>
-                                    <!--<div class="uk-margin">-->
+                                <form action="" method="post">
+                                    {% csrf_token %}
+
+
+                                        <!--<div class="uk-margin">-->
                                         <!--<label class="uk-form-label" for="form-stacked-text">First and last name</label>-->
                                         <!--<div class="uk-form-controls">-->
                                             <!--<input class="uk-input" id="form-stacked-text" type="text" placeholder="">-->
@@ -35,26 +38,31 @@
                                         <!--</div>-->
                                     <!--</div>-->
                                     <div class="uk-margin">
-                                        <label class="uk-form-label" for="form-stacked-text">Username</label>
+                                        <label class="uk-form-label"  for="id_username">Username:</label>
                                         <div class="uk-form-controls">
-                                            <input class="uk-input" id="form-stacked-text" type="text" placeholder="">
+                                        <input class="uk-input" id="id_username" type="text" name="username" maxlength="30">
                                         </div>
                                     </div>
                                     <div class="uk-margin">
-                                        <label class="uk-form-label" for="form-stacked-text">Password</label>
+                                        <label class="uk-form-label" for="id_password1">Password:</label>
                                         <div class="uk-form-controls">
-                                            <input class="uk-input" id="form-stacked-text" type="password" placeholder="">
-                                        </div>
-                                        <small class="uk-flex uk-flex-middle uk-margin-small-top">Minimum 6 characters, at least one letter and one number.</small>
-                                    </div>
-                                    <div class="uk-margin">
-                                        <div class="uk-form-controls">
-                                            <label><input class="uk-checkbox uk-margin-small-right" type="checkbox"><small>Accept our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</small></label>
+                                        <input class="uk-input" type="password" name="password1" id="id_password1"></p>
                                         </div>
                                     </div>
                                     <div class="uk-margin">
+                                        <label class="uk-form-label"  for="id_password2">Password confirmation:</label>
                                         <div class="uk-form-controls">
-                                            <button class="uk-button uk-button-primary">Create Account</button>
+                                        <input class="uk-input" type="password" name="password2" id="id_password2">
+                                        </div>
+                                    </div>
+                                    <div class="uk-margin">
+                                        <div class="uk-form-controls">
+                                            <!--<label><input class="uk-checkbox uk-margin-small-right" type="checkbox"><small>Accept our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</small></label>-->
+                                        </div>
+                                    </div>
+                                    <div class="uk-margin">
+                                        <div class="uk-form-controls">
+                                            <button class="uk-button uk-button-primary" type="submit">Create Account</button>
                                         </div>
                                     </div>
                                 </form>

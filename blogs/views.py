@@ -19,16 +19,21 @@ class PostListView(ListView):
     paginate_by = 5
 
     def get(self, request, *args, **kwargs):
-        # user_list = User.objects.all()
         self.object_list = self.get_queryset()
         allow_empty = self.get_allow_empty()
         if not allow_empty and len(self.object_list) == 0:
             raise Http404(_(u"Empty list and '%(class_name)s.allow_empty' is False.")
                           % {'class_name': self.__class__.__name__})
-        context = self.get_context_data(object_list=self.object_list.filter())
-        # context = self.object_list.filter( Post.user.name['User_A'] )
-        # username = auth.get_user(request).username
-        return self.render_to_response({ 'postlist': context, 'username': auth.get_user(request).username})
+        #context = self.get_context_data(object_list=self.object_list.filter())
+        news_list = Post.objects.all().order_by('-pub_date')
+        user_list = User.objects.all()
+        context = Context({
+            'news_list_param': self.get_context_data(object_list=self.object_list.filter()),
+            #'user_list': user_list,
+            'username': auth.get_user(request).username,
+        })
+        return self.render_to_response(context)
+
 
     def get_paginate_by(self, queryset):
         """
