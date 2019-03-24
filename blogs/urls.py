@@ -1,7 +1,9 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from views import index, page, upload
-from blogs.views import AboutView, PostListView
+from views import index, upload, PageView, UpdateBlogView, CreateBlogView, DeleteBlogView, MAinPagesView, \
+    CommitDetailView
+
+# from blogs.views import AboutView
 
 
 admin.autodiscover()
@@ -9,20 +11,19 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
                        url(r'^admin/', include(admin.site.urls)),
-                       url(r'^blog/(?P<blog_id>\d+)/$', page),
+                       url(r'^blog/new/$', CreateBlogView.as_view(), name="blog-new"),
+                       url(r'^blog/(?P<pk>\d+)/$', PageView.as_view(), name="blog-detail"),
+                       url(r'^commit/(?P<pk>\d+)/$', CommitDetailView.as_view(), name="commit-detail"),
+                       url(r'^blog/(?P<pk>\d+)/update/$', UpdateBlogView.as_view(), name="blog-update"),
+                       url(r'^blog/(?P<pk>\d+)/delete/$', DeleteBlogView.as_view(), name="blog-delete"),
                        url(r'^upload/', upload),
-                       (r'^about/', AboutView.as_view()),
-                       (r'post_list/', PostListView.as_view()),
+                       # url(r'^about/', AboutView.as_view()),
+                       # (r'post_list/', PostListView.as_view()),
                        url(r'^auth/', include('loginsystem.urls')),
-                       url(r'^$', index),
+                       url(r'^$',  MAinPagesView.as_view(), name="home"),
+
+
 # (r'^about/', AboutView.as_view()),
 
-    # Examples:
-    # url(r'^$', 'news.views.home', name='home'),
-    # url(r'^news/', include('news.foo.urls')),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
 )

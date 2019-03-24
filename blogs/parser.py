@@ -104,7 +104,6 @@ class Parser():
         return user_date
 
 
-
     def svodka(self, array, sum):
         svod={}
         g=[]
@@ -113,7 +112,7 @@ class Parser():
                 g.append(str(len(val)))
                 b= float('{:.3f}'.format((len(val)*100)/sym))
                 g.append(b)
-                svod.update({key : g})#допиши знак % в файл
+                svod.update({key : g})
                 g=[]
         return svod
 
@@ -127,11 +126,11 @@ class Parser():
         try:
             log_file = open(src, 'r')
         except(IOError)as e:
-            print('Вы ввели неверный путь')
+            print(u'Вы ввели неверный путь')
         else:
             log = log_file.read()
             log_file.close()
-            print('Все хорошо')
+            print(u'Все хорошо')
             return log
 
     def sort(self, log):
@@ -165,7 +164,7 @@ class Parser():
         text = re.split('--', log)
         all_commits = []
         for line in text:
-            if 'revno:' in line and 'comitter:' in line and 'timestamp:' in line:
+            if 'revno:' in line and 'committer: user_' in line and 'timestamp:' and '' in line:
                 data = line.split('\n')
                 if data[0] != "":
                     data.insert(0, "")  # костыль для первого элемента файла

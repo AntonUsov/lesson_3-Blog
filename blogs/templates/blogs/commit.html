@@ -2,14 +2,14 @@
 
 {% block head %}
 	{% block title %}
-    <title>{{ post.title }}</title>
-{% endblock %}
+    <title>Commit№: {{ commit.revno }}</title>
+    {% endblock %}
 {% endblock %}
 
 {% block content %}
 <article class="uk-article">
-    <h1 class="uk-article-title">{{ post.title }}</h1>
-    <p class="uk-article-meta">Автор <a href="#">{{ post.user  }}</a> | Дата публикации: {{ post.pub_date  }}</p>
+    <h1 class="uk-article-title">{{ commit.revno }}</h1>
+    <p class="uk-article-meta">Автор <a href="#">{{ commit.user  }}</a>. Дата публикации: {{ commit.timestamp  }}</p>
     <hr>
     {% if blog_user and blog_user == post.user %}
     <ul class="uk-iconnav">

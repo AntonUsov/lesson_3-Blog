@@ -1,0 +1,47 @@
+{% extends 'blogs/wrapper.html' %}
+
+{% block head %}
+	{% block title %}
+    <title>{{ object.name }}</title>
+{% endblock %}
+{% endblock %}
+
+{% block content %}
+<!--<article class="uk-article">-->
+    <!--<h1 class="uk-article-title"><a class="uk-link-reset" href="">{{ post.title }}</a></h1>-->
+    <!--<p class="uk-article-meta">Автор <a href="#">{{ post.user  }}</a>. Дата публикации: {{ post.pub_date  }}</p>-->
+     <!--<hr>-->
+    <!--<p class="uk-text-lead">{{ post.text }}</p>-->
+<!--</article>-->
+<form method="post">
+    {% csrf_token %}
+ {# {{  form.as_p }} #}
+    <legend class="uk-legend">Статус</legend>
+    <div class="uk-margin">
+        <!--<label for="{{ form.status.id_for_label }}"></label>-->
+        <div class="uk-form-controls">
+            <!--<input id="{{ form.title.id_for_label}}" class="uk-input uk-form-width-medium uk-form-large" type="text" placeholder="Большой">-->
+            {{ form.status }}
+        </div>
+    </div>
+    <legend class="uk-legend">Биометрические данные </legend>
+    <div class="uk-margin">
+        <!--<label for="{{ form.text.id_for_label }}">Название статьи</label>-->
+        <div class="uk-form-controls">
+            <!--<input id="{{ form.title.id_for_label}}" class="uk-input uk-form-width-medium uk-form-large" type="text" placeholder="Большой">-->
+            {{ form.bio }}
+        </div>
+    </div>
+    <legend class="uk-legend">Дата рождения</legend>
+        <div class="uk-margin">
+        <!--<label for="{{ form.text.id_for_label }}">Название статьи</label>-->
+        <div class="uk-form-controls">
+            <!--<input id="{{ form.title.id_for_label}}" class="uk-input uk-form-width-medium uk-form-large" type="text" placeholder="Большой">-->
+            {{ form.date_of_birth }}
+        </div>
+    </div>
+    <button class="uk-button uk-button-primary uk-button-small" >Сохранить</button>
+</form>
+
+<a class="uk-margin-top uk-button uk-button-text" href="/">Вернуться назад</a>
+{% endblock %}

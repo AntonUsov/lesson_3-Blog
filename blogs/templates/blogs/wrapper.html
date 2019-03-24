@@ -18,9 +18,16 @@
     <div class="uk-navbar-left uk-margin-left">
 
         <ul class="uk-navbar-nav">
-            <li class=""><a href="/">Главная</a></li>
-             <li class=""><a href="/about">О проекте</a></li>
-             <li class=""><a href="/post_list">Список статей</a></li>
+            <li class=""><a href="{% url home %}">Главная</a></li>
+             <!--<li class=""><a href="/about">О проекте</a></li>-->
+             <li class=""><a href="{% url home %}">Список статей</a></li>
+            {% if blog_user %}
+
+                <li class=""><a href="{% url blog-new %}">Добавить запись</a></li>
+                <li><a href="{% url user-edit %}" data-uk-icon="icon: cog" class="uk-icon" uk-tooltip="title: Редактировать профиль; pos: bottom"></a></li>
+                <!--<li class=""><a href="{% url user-edit %}">Редактировать профиль</a></li>-->
+            {% endif %}
+
             <!--<li>-->
                 <!--<a href="#">Родитель</a>-->
                 <!--<div class="uk-navbar-dropdown">-->
@@ -37,10 +44,14 @@
     </div>
         <div class="uk-navbar-right uk-margin-right">
         <ul class="uk-navbar-nav">
-            {% if username %}
-            <li class=""><a href="/auth/logout">Выход {{ username }} </a></li>
+            {% if user.is_anonymous %}
+                <li class=""><a href="/auth/login">Войти</a></li>
             {% else %}
-             <li class=""><a href="/auth/login">Войти</a></li>
+            <li><a href="{% url profile %}">{{ user.username }}</a></li>
+                <li><a href="{% url profile %}" data-uk-icon="icon: user" class="uk-icon" uk-tooltip="title: Личный кабинет; pos: bottom"></a></li>
+                <!--<li class=""><a href="{% url profile %}" uk-icon="icon: user">Профиль</a></li>-->
+                <li><a href="/auth/logout" data-uk-icon="icon: sign-out" class="uk-icon" uk-tooltip="title: Logout; pos: bottom"></a></li>
+                <!--<li class=""><a href="/auth/logout">Выход ({{ user.username }}) </a></li>-->
             {% endif %}
             <!--<li>-->
                 <!--<a href="#">Родитель</a>-->

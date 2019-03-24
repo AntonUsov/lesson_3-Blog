@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from decimal import Context
+
 from django.contrib import auth
 from django.views.generic import TemplateView
 from django.shortcuts import render_to_response, redirect
@@ -14,6 +16,9 @@ from django.contrib.auth import login
 from django.http import HttpResponseRedirect
 from django.views.generic.base import View
 from django.contrib.auth import logout
+
+from blogs.models import Post, User, Commit
+from blogs.views import BaseView
 
 
 class LogoutView(View):
@@ -59,6 +64,20 @@ class SignupView(FormView):
 
         # Вызываем метод базового класса
         return super(SignupView, self).form_valid(form)
+
+
+class ProfileView(BaseView, TemplateView, LoginView):
+    # model = Post, User
+    template_name = 'profile.html'
+    # context_object_name = 'profile'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProfileView, self).get_context_data()
+        commit_list = Commit.objects.all().filter(user=self.blog_user)
+        # context['user_data'] = User.objects.filter(user=self.blog_user)
+        context['news_list'] = Post.objects.filter(user=self.blog_user)
+        context['commit_list'] = commit_list.order_by('-timestamp')[:5]
+        return context
 
 
 # def login(request):

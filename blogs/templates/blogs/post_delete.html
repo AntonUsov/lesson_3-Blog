@@ -1,0 +1,18 @@
+{% extends 'blogs/wrapper.html' %}
+
+{% block head %}
+	{% block title %}
+        <title>{{ post.title }}</title>
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    <h1>Вы уверены в своём решении?</h1>
+    <button>УДАЛИТЬ</button>
+</form>
+
+<a class="uk-margin-top uk-button uk-button-text" href="/">Вернуться назад</a>
+{% endblock %}

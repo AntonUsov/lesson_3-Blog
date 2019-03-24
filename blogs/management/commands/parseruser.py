@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from optparse import make_option
+
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand
 # from __future__ import unicode_literals
@@ -10,15 +12,25 @@ from blogs.parser import Parser
 
 class Command(BaseCommand):
 
+    option_list = BaseCommand.option_list + (
+        make_option('--file_path',
+            # action='store_true',
+            dest='file_path',
+            # default=False,
+            help=''),
+        )
+
     def handle(self, *args, **options):
+        src = options.get('file_path')
+        if not src:
+            print u'Укажите параметр --file_path'
         parser1 = Parser()
-        src = '/home/anton/Загрузки/test_data_commits.log'
         log = parser1.open_file(src)
+        print u'файл получен'
         if log:
             commit_list = parser1.new_commit_list(log)
             for commit in commit_list:
                 print commit
-
                 if not User.objects.filter(username=commit['username']).exists():
                     new_django_user = User.objects.create(username=commit['username'], password=commit['username'])
                     new_django_user.save()

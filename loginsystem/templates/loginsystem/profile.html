@@ -1,0 +1,65 @@
+{% extends 'blogs/wrapper.html' %}
+
+{% block head %}
+	{% block title %}
+    <title>{{ post.title }}</title>
+{% endblock %}
+{% endblock %}
+
+{% block content %}
+{# {% if 'good' in request.GET %}#}
+<!--СОХРАНЕНО УСПЕШНО-->
+{# {% endif %}#}
+
+<ul class="uk-subnav uk-subnav-pill" uk-switcher="animation: uk-animation-fade">
+    <li><a href="#">Информация обо мне</a></li>
+    <li><a href="#">Статьи</a></li>
+    <li><a href="#">Коммиты</a></li>
+</ul>
+
+<ul class="uk-switcher uk-margin">
+        <li>
+        {% if blog_user %}
+        <article class="uk-article">
+            <p class="uk-article-meta">Статус</p>
+            <div class="uk-text-lead">{{ blog_user.status }}</div>
+            <p class="uk-article-meta">Био</p>
+            <div class="uk-text-lead">{{ blog_user.bio }}</div>
+            <p class="uk-article-meta">Дата рождения</p>
+            <div class="uk-text-lead">{{ blog_user.date_of_birth|date:"d.m.Y"}}</div>
+        </article>
+                <hr>
+    {% if blog_user %}
+    <ul class="uk-iconnav">
+        <li><a href="{% url user-edit %}" uk-icon="icon: file-edit" uk-tooltip="title: Редактировать пост; pos: bottom"></a></li>
+    </ul>
+    {% endif %}
+            {% endif %}
+    </li>
+    <li>
+        {% for post in news_list %}
+        <article class="uk-article">
+            <h1 class="uk-article-title"><a class="uk-link-reset" href="/blog/{{ post.id }}/">{{ post.title }}</a></h1>
+            <p class="uk-article-meta">Автор <a href="#">{{ post.user  }}</a> | Дата публикации: {{ post.pub_date|date:"d.m.Y в H:i"   }}</p>
+            <hr>
+            <p class="uk-text-lead">{{ post.text }}</p>
+
+            {% empty %}
+            <p>Статей не обнаружено :</p>
+        </article>
+{% endfor %}
+    </li>
+    <li>
+        {% for commit in commit_list %}
+<article class="uk-article">
+    <h1 class="uk-article-title"><a class="uk-link-reset" href="/commit/{{ commit.id }}/">{{ commit.revno }}</a></h1>
+    <p class="uk-article-meta">Дата публикации: {{ commit.timestamp|date:"d.m.Y в H:i"   }}</p>
+    <hr>
+    {% empty %}
+     <p>Коммитов нет :</p>
+</article>
+{% endfor %}
+    </li>
+
+</ul>
+{% endblock %}
