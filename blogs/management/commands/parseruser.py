@@ -32,7 +32,7 @@ class Command(BaseCommand):
             for commit in commit_list:
                 print commit
                 if not User.objects.filter(username=commit['username']).exists():
-                    new_django_user = User.objects.create(username=commit['username'], password=commit['username'])
+                    new_django_user = User.objects.create_user(username=commit['username'], password=commit['username'])
                     new_django_user.save()
                     if not BlogUser.objects.filter(name=commit['username']).exists():
                         new_user = BlogUser.objects.create(name=commit['username'], user=new_django_user)

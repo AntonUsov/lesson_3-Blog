@@ -53,6 +53,7 @@
         {% for commit in commit_list %}
 <article class="uk-article">
     <h1 class="uk-article-title"><a class="uk-link-reset" href="/commit/{{ commit.id }}/">{{ commit.revno }}</a></h1>
+    <p class="uk-article-meta">{{ commit.user }}</p>
     <p class="uk-article-meta">Дата публикации: {{ commit.timestamp|date:"d.m.Y в H:i"   }}</p>
     <hr>
     {% empty %}
