@@ -16,6 +16,7 @@
 <form method="post">
     {% csrf_token %}
  {# {{  form.as_p }} #}
+    {{  form.errors }}
     <legend class="uk-legend">Статус</legend>
     <div class="uk-margin">
         <!--<label for="{{ form.status.id_for_label }}"></label>-->
